@@ -1,11 +1,16 @@
+
+import { NavLink } from 'react-router-dom'
 import './Navigation.css'
 
 function Navigation() {
   return (
-    <nav className="navigation" aria-label="Main navigation">
-      <a className="navigation__link navigation__link_active" href="/">
+    <nav className="navigation">
+      <NavLink className="navigation__link" to="/">
         Home
-      </a>
+      </NavLink>
+      <NavLink className="navigation__link" to="/saved-news">
+        Saved articles
+      </NavLink>
       <button className="navigation__signin" type="button">
         Sign in
       </button>
