@@ -1,5 +1,7 @@
+
 import Header from './components/Header/Header'
 import SearchForm from './components/SearchForm/SearchForm'
+import Main from './components/Main/Main'
 import About from './components/About/About'
 import Footer from './components/Footer/Footer'
 import './index.css'
@@ -9,11 +11,10 @@ function App() {
     <div className="app">
       <div className="app__hero">
         <Header />
-        <main>
-          <SearchForm />
-          <About />
-        </main>
+        <SearchForm />
       </div>
+      <Main />
+      <About />
       <Footer />
     </div>
   )
