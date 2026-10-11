@@ -55,6 +55,12 @@
   background: #347eff;
 }
 
+.search__error {
+  margin: 12px 0 0;
+  color: #ff4d4f;
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
   .search {
     padding: 48px 24px;
@@ -105,4 +111,5 @@
     width: 100%;
     height: 56px;
   }
+
 }

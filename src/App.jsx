@@ -75,9 +75,11 @@ function handleDeleteArticle(url) {
     try {
       const results = await searchNews(keyword)
       setArticles(results)
-    } catch (err) {
-      setError(err.message || 'Something went wrong')
-    } finally {
+    } catch {
+  setError(
+    'Sorry, something went wrong during the request. Please try again later.'
+  )
+} finally {
       setIsLoading(false)
     }
   }

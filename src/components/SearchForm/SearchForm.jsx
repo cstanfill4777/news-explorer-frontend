@@ -4,16 +4,21 @@ import './SearchForm.css'
 
 function SearchForm({ onSearch, isLoading }) {
   const [keyword, setKeyword] = useState('')
+  const [validationError, setValidationError] = useState('')
 
   function handleSubmit(event) {
-    event.preventDefault()
+  event.preventDefault()
 
-    const trimmedKeyword = keyword.trim()
+  const trimmedKeyword = keyword.trim()
 
-    if (!trimmedKeyword) return
-
-    onSearch(trimmedKeyword)
+  if (!trimmedKeyword) {
+    setValidationError('Please enter a keyword')
+    return
   }
+
+  setValidationError('')
+  onSearch(trimmedKeyword)
+}
 
   return (
     <section className="search">
@@ -34,8 +39,10 @@ function SearchForm({ onSearch, isLoading }) {
             placeholder="Enter topic"
             aria-label="Search topic"
             value={keyword}
-            onChange={(event) => setKeyword(event.target.value)}
-            required
+            onChange={(event) => {
+  setKeyword(event.target.value)
+  setValidationError('')
+}}
           />
 
           <button
@@ -46,6 +53,11 @@ function SearchForm({ onSearch, isLoading }) {
             {isLoading ? 'Searching...' : 'Search'}
           </button>
         </form>
+{validationError && (
+  <p className="search__error" role="alert">
+    {validationError}
+  </p>
+)}
       </div>
     </section>
   )
