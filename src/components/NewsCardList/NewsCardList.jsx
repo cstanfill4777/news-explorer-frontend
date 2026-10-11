@@ -3,7 +3,13 @@ import { useState } from 'react'
 import NewsCard from '../NewsCard/NewsCard'
 import './NewsCardList.css'
 
-function NewsCardList({ articles }) {
+function NewsCardList({
+  articles,
+  isLoggedIn,
+  savedArticles = [],
+  onSaveArticle,
+  onDeleteArticle,
+}) {
   const [visibleCount, setVisibleCount] = useState(3)
 
   const visibleArticles = articles.slice(0, visibleCount)
@@ -16,7 +22,16 @@ function NewsCardList({ articles }) {
 
         <div className="news-card-list__grid">
           {visibleArticles.map((article) => (
-            <NewsCard key={article.url} article={article} />
+            <NewsCard
+              key={article.url}
+              article={article}
+              isLoggedIn={isLoggedIn}
+              isSaved={isLoggedIn && savedArticles.some(
+  (saved) => saved.url === article.url
+)}
+              onSaveArticle={onSaveArticle}
+              onDeleteArticle={onDeleteArticle}
+            />
           ))}
         </div>
 

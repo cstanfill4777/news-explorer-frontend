@@ -4,12 +4,17 @@ import { Link } from 'react-router-dom'
 import Navigation from '../Navigation/Navigation'
 import './Header.css'
 
-function Header({ onSignInClick }) {
+function Header({ onSignInClick, user, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   function handleSignIn() {
     setMenuOpen(false)
     onSignInClick()
+  }
+
+  function handleLogout() {
+    setMenuOpen(false)
+    onLogout()
   }
 
   return (
@@ -19,7 +24,11 @@ function Header({ onSignInClick }) {
           NewsExplorer
         </Link>
 
-        <Navigation onSignInClick={onSignInClick} />
+        <Navigation
+          onSignInClick={onSignInClick}
+          user={user}
+          onLogout={onLogout}
+        />
 
         <button
           className="header__menu-button"
@@ -39,13 +48,21 @@ function Header({ onSignInClick }) {
             Home
           </Link>
 
-          <Link to="/saved-news" onClick={() => setMenuOpen(false)}>
-            Saved articles
-          </Link>
+          {user && (
+            <Link to="/saved-news" onClick={() => setMenuOpen(false)}>
+              Saved articles
+            </Link>
+          )}
 
-          <button type="button" onClick={handleSignIn}>
-            Sign in
-          </button>
+          {user ? (
+            <button type="button" onClick={handleLogout}>
+              Log out ({user.name})
+            </button>
+          ) : (
+            <button type="button" onClick={handleSignIn}>
+              Sign in
+            </button>
+          )}
         </nav>
       )}
     </header>

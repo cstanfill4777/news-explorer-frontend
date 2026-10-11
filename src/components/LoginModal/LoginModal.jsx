@@ -1,10 +1,16 @@
 
 import ModalWithForm from '../ModalWithForm/ModalWithForm'
 
-function LoginModal({ isOpen, onClose, onSwitch }) {
+function LoginModal({ isOpen, onClose, onSwitch, onLogin }) {
   function handleSubmit(event) {
-    event.preventDefault()
-  }
+  event.preventDefault()
+
+  const formData = new FormData(event.currentTarget)
+  const email = formData.get('email')
+  const password = formData.get('password')
+
+  onLogin(email, password)
+}
 
   return (
     <ModalWithForm

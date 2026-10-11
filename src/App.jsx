@@ -12,6 +12,17 @@ import LoginModal from './components/LoginModal/LoginModal'
 import RegisterModal from './components/RegisterModal/RegisterModal'
 import { searchNews } from './utils/newsApi'
 import './index.css'
+import {
+  mockLogin,
+  mockRegister,
+  mockCheckToken,
+  mockLogout,
+} from './utils/mockAuth'
+import {
+  getSavedArticles,
+  saveArticle,
+  deleteArticle,
+} from './utils/mockArticlesApi'
 
 function App() {
   const [activeModal, setActiveModal] = useState(null)
@@ -21,11 +32,38 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false)
   const [searchId, setSearchId] = useState(0)
 
-  const isLoggedIn = false
+  const [user, setUser] = useState(() => mockCheckToken())
+  const isLoggedIn = Boolean(user)
+const [savedArticles, setSavedArticles] = useState(() => getSavedArticles())
 
   function closeModal() {
     setActiveModal(null)
   }
+
+  function handleLogin(email, password) {
+  const loggedInUser = mockLogin(email, password)
+  setUser(loggedInUser)
+  closeModal()
+}
+
+function handleRegister(email, password, name) {
+  const registeredUser = mockRegister(email, password, name)
+  setUser(registeredUser)
+  closeModal()
+}
+
+function handleLogout() {
+  mockLogout()
+  setUser(null)
+}
+
+function handleSaveArticle(article) {
+  setSavedArticles(saveArticle(article))
+}
+
+function handleDeleteArticle(url) {
+  setSavedArticles(deleteArticle(url))
+}
 
   async function handleSearch(keyword) {
     setSearchId((id) => id + 1)
@@ -47,7 +85,11 @@ function App() {
   return (
     <div className="app">
       <div className="app__hero">
-        <Header onSignInClick={() => setActiveModal('login')} />
+        <Header
+  onSignInClick={() => setActiveModal('login')}
+  user={user}
+  onLogout={handleLogout}
+/>
 
         <Routes>
           <Route
@@ -73,6 +115,10 @@ function App() {
                 error={error}
                 hasSearched={hasSearched}
 		searchId={searchId}
+		isLoggedIn={isLoggedIn}
+savedArticles={savedArticles}
+onSaveArticle={handleSaveArticle}
+onDeleteArticle={handleDeleteArticle}
               />
               <About />
             </>
@@ -80,23 +126,33 @@ function App() {
         />
 
         <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
-          <Route path="/saved-news" element={<SavedNews />} />
+          <Route
+  path="/saved-news"
+  element={
+    <SavedNews
+      articles={savedArticles}
+      onDeleteArticle={handleDeleteArticle}
+    />
+  }
+/>
         </Route>
       </Routes>
 
       <Footer />
 
       <LoginModal
-        isOpen={activeModal === 'login'}
-        onClose={closeModal}
-        onSwitch={() => setActiveModal('register')}
-      />
+  isOpen={activeModal === 'login'}
+  onClose={closeModal}
+  onSwitch={() => setActiveModal('register')}
+  onLogin={handleLogin}
+/>
 
-      <RegisterModal
-        isOpen={activeModal === 'register'}
-        onClose={closeModal}
-        onSwitch={() => setActiveModal('login')}
-      />
+<RegisterModal
+  isOpen={activeModal === 'register'}
+  onClose={closeModal}
+  onSwitch={() => setActiveModal('login')}
+  onRegister={handleRegister}
+/>
     </div>
   )
 }

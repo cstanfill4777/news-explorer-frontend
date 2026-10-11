@@ -1,16 +1,28 @@
 
-import { useState } from 'react'
 import './NewsCard.css'
 
-function NewsCard({ article }) {
-  const [isSaved, setIsSaved] = useState(false)
-  const isLoggedIn = false
-
+function NewsCard({
+  article,
+  isLoggedIn = false,
+  isSaved = false,
+  onSaveArticle,
+  onDeleteArticle,
+}) {
   const date = new Date(article.publishedAt).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   })
+
+  function handleBookmarkClick() {
+    if (!isLoggedIn) return
+
+    if (isSaved) {
+      onDeleteArticle(article.url)
+    } else {
+      onSaveArticle(article)
+    }
+  }
 
   return (
     <article className="news-card">
@@ -25,6 +37,7 @@ function NewsCard({ article }) {
           src={article.urlToImage}
           alt={article.title}
         />
+
         <div className="news-card__content">
           <time className="news-card__date" dateTime={article.publishedAt}>
             {date}
@@ -42,12 +55,8 @@ function NewsCard({ article }) {
         type="button"
         aria-label={isSaved ? 'Remove saved article' : 'Save article'}
         aria-pressed={isSaved}
-	title={!isLoggedIn ? 'Sign in to save articles' : undefined}
-        onClick={() => {
-  if (isLoggedIn) {
-    setIsSaved((saved) => !saved)
-  }
-}}
+        title={!isLoggedIn ? 'Sign in to save articles' : undefined}
+        onClick={handleBookmarkClick}
       >
         <svg
           width="24"

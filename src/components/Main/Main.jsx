@@ -2,8 +2,17 @@
 import NewsCardList from '../NewsCardList/NewsCardList'
 import Preloader from '../Preloader/Preloader'
 
-function Main({ articles, isLoading, error, hasSearched, searchId }) {
-  if (isLoading) {
+function Main({
+  articles,
+  isLoading,
+  error,
+  hasSearched,
+  searchId,
+  isLoggedIn,
+  savedArticles,
+  onSaveArticle,
+  onDeleteArticle,
+}) {  if (isLoading) {
   return (
     <main className="news-card-list">
       <Preloader />
@@ -35,7 +44,14 @@ function Main({ articles, isLoading, error, hasSearched, searchId }) {
 
   return (
     <main>
-     <NewsCardList key={searchId} articles={articles} />
+     <NewsCardList
+  key={searchId}
+  articles={articles}
+  isLoggedIn={isLoggedIn}
+  savedArticles={savedArticles}
+  onSaveArticle={onSaveArticle}
+  onDeleteArticle={onDeleteArticle}
+/>
     </main>
   )
 }
