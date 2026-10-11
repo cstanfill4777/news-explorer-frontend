@@ -62,3 +62,28 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .news-card__image {
+    height: 150px;
+  }
+
+  .news-card__content {
+    padding: 12px;
+  }
+
+  .news-card__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .news-card__description {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .news-card__date,
+  .news-card__source {
+    font-size: 12px;
+  }
+}

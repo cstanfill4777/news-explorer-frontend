@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -5,11 +6,25 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  color: #1a1b22;
+}
+
+button,
+input {
+  font: inherit;
 }
 
 .app__hero {
   min-height: 576px;
-  background: #242832;
+  background-color: #242832;
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.35)
+    ),
+    url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8");
+  background-position: center;
+  background-size: cover;
 }
 
 .header__container,
@@ -17,4 +32,23 @@ body {
 .footer__container {
   padding-left: 24px;
   padding-right: 24px;
+}
+
+@media (max-width: 768px) {
+  .app__hero {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app__hero {
+    min-height: 536px;
+  }
+
+  .header__container,
+  .about__container,
+  .footer__container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }

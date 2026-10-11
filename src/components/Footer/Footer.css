@@ -35,3 +35,35 @@
 .footer__social:hover {
   opacity: 0.65;
 }
+
+
+@media (max-width: 768px) {
+  .footer__navigation {
+    gap: 20px;
+  }
+
+  .footer__link,
+  .footer__social,
+  .footer__copyright {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer__container {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .footer__navigation {
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 24px 0;
+  }
+}
