@@ -18,11 +18,11 @@ input {
   min-height: 576px;
   background-color: #242832;
   background-image:
-    linear-gradient(
-      rgba(0, 0, 0, 0.35),
-      rgba(0, 0, 0, 0.35)
-    ),
-    url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8");
+  linear-gradient(
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.35)
+  ),
+  url("/images/hero.jpg");
   background-position: center;
   background-size: cover;
 }
