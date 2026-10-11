@@ -1,5 +1,8 @@
 
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY
+const NEWS_API_URL = import.meta.env.PROD
+  ? 'https://nomoreparties.co/news/v2/everything'
+  : 'https://newsapi.org/v2/everything'
 
 export async function searchNews(keyword) {
   if (!API_KEY) {
@@ -21,8 +24,8 @@ export async function searchNews(keyword) {
   })
 
   const response = await fetch(
-    `https://newsapi.org/v2/everything?${params.toString()}`
-  )
+  `${NEWS_API_URL}?${params.toString()}`
+)
 
   const data = await response.json()
 

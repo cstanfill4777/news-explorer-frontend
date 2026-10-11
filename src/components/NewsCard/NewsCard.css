@@ -50,17 +50,32 @@
   text-transform: uppercase;
 }
 
+
 .news-card__bookmark {
   position: absolute;
   top: 24px;
   right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
+  padding: 0;
   border: 0;
   border-radius: 8px;
   background: #fff;
-  font-size: 24px;
+  color: #b6bcbf;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.news-card__bookmark:hover {
+  color: #1a1b22;
+}
+
+.news-card__bookmark_saved,
+.news-card__bookmark_saved:hover {
+  color: #2f71e5;
 }
 
 @media (min-width: 601px) and (max-width: 768px) {
