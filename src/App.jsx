@@ -10,22 +10,55 @@ import SavedNews from './components/SavedNews/SavedNews'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import LoginModal from './components/LoginModal/LoginModal'
 import RegisterModal from './components/RegisterModal/RegisterModal'
+import { searchNews } from './utils/newsApi'
 import './index.css'
 
 function App() {
   const [activeModal, setActiveModal] = useState(null)
+  const [articles, setArticles] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [hasSearched, setHasSearched] = useState(false)
+  const [searchId, setSearchId] = useState(0)
+
   const isLoggedIn = false
 
   function closeModal() {
     setActiveModal(null)
   }
 
+  async function handleSearch(keyword) {
+    setSearchId((id) => id + 1)
+    setIsLoading(true)
+    setError('')
+    setHasSearched(true)
+    setArticles([])
+
+    try {
+      const results = await searchNews(keyword)
+      setArticles(results)
+    } catch (err) {
+      setError(err.message || 'Something went wrong')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className="app">
       <div className="app__hero">
         <Header onSignInClick={() => setActiveModal('login')} />
+
         <Routes>
-          <Route path="/" element={<SearchForm />} />
+          <Route
+            path="/"
+            element={
+              <SearchForm
+                onSearch={handleSearch}
+                isLoading={isLoading}
+              />
+            }
+          />
         </Routes>
       </div>
 
@@ -34,7 +67,13 @@ function App() {
           path="/"
           element={
             <>
-              <Main />
+              <Main
+                articles={articles}
+                isLoading={isLoading}
+                error={error}
+                hasSearched={hasSearched}
+		searchId={searchId}
+              />
               <About />
             </>
           }

@@ -1,14 +1,41 @@
 
-import { useState } from 'react'
 import NewsCardList from '../NewsCardList/NewsCardList'
-import { mockArticles } from '../../utils/mockArticles'
+import Preloader from '../Preloader/Preloader'
 
-function Main() {
-  const [articles] = useState(mockArticles)
+function Main({ articles, isLoading, error, hasSearched, searchId }) {
+  if (isLoading) {
+  return (
+    <main className="news-card-list">
+      <Preloader />
+    </main>
+  )
+}
+
+  if (error) {
+    return (
+      <main className="news-card-list">
+        <p className="news-card-list__container" role="alert">
+          {error}
+        </p>
+      </main>
+    )
+  }
+
+  if (!hasSearched) return null
+
+  if (articles.length === 0) {
+    return (
+      <main className="news-card-list">
+        <p className="news-card-list__container">
+          Nothing found. Try another keyword.
+        </p>
+      </main>
+    )
+  }
 
   return (
     <main>
-      <NewsCardList articles={articles} />
+     <NewsCardList key={searchId} articles={articles} />
     </main>
   )
 }
