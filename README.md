@@ -68,7 +68,7 @@ https://nomoreparties.co/news/v2/everything
 
 ## Project Pitch Video
 
-Video link: To be added.
+[Watch the NewsExplorer project pitch](https://drive.google.com/file/d/1zQixyCcc_l5Umdu9KuDIUR3klp4w_RM-/view?usp=sharing)
 
 ## Repository
 
