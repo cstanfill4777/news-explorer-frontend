@@ -24,7 +24,8 @@ export async function searchNews(keyword) {
   })
 
   const response = await fetch(
-  `${NEWS_API_URL}?${params.toString()}`
+  `${NEWS_API_URL}?${params.toString()}`,
+  { signal: AbortSignal.timeout(10000) }
 )
 
   const data = await response.json()
