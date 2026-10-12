@@ -20,7 +20,7 @@ function Footer() {
           </a>
           <a
             className="footer__social"
-            href="https://github.com/"
+            href="https://github.com/cstanfill4777"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
