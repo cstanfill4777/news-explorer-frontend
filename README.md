@@ -1,16 +1,75 @@
-# React + Vite
+# NewsExplorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NewsExplorer is a responsive web application that allows users to search for recent news articles, browse search results, and save articles to a personal collection.
 
-Currently, two official plugins are available:
+This project is the Stage 1 frontend implementation of the TripleTen Web Development final project.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Website
 
-## React Compiler
+https://cstanfill4777-news-explorer.netlify.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Search for recent news articles using NewsAPI.
+- Display search results with article images, titles, descriptions, dates, and sources.
+- Load additional articles using the **Show more** button.
+- Display loading, empty-result, and API error states.
+- Responsive layouts for desktop, tablet, and mobile.
+- Sign-up and sign-in modals with form validation.
+- Simulated authentication and saved-article functionality.
+- Protected route for saved articles.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies
+
+- React
+- JavaScript
+- Vite
+- React Router
+- CSS
+- NewsAPI
+- Netlify
+
+## Running Locally
+
+Clone the repository and install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env.local` file in the project root containing:
+
+```env
+VITE_NEWS_API_KEY=your_newsapi_key
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+To check the code and create a production build:
+
+```bash
+npm run lint
+npm run build
+```
+
+## API Configuration
+
+The application uses the NewsAPI `/v2/everything` endpoint during local development.
+
+In production, it uses the NewsAPI proxy specified by TripleTen:
+
+https://nomoreparties.co/news/v2/everything
+
+**Known external service issue:** During deployment testing on October 11, 2026, the course-provided production proxy failed to respond, producing connection-closed and connection-timeout errors. Local NewsAPI requests were verified to work. Production search availability depends on the course-provided proxy being accessible.
+
+## Project Pitch Video
+
+Video link: To be added.
+
+## Repository
+
+https://github.com/cstanfill4777/news-explorer-frontend
